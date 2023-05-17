@@ -1,0 +1,30 @@
+var HospitalesPublicos ={
+"type": "FeatureCollection",
+"name": "HospitalesPublicos",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Arturo Illia", "DEPARTAMENTO": "La Paz" }, "geometry": { "type": "Point", "coordinates": [ -67.5491533, -33.4585497, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Arenas Raffo", "DEPARTAMENTO": "Santa Rosa" }, "geometry": { "type": "Point", "coordinates": [ -68.1448383, -33.2536715, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Carlos Pereyra", "DEPARTAMENTO": "Capital" }, "geometry": { "type": "Point", "coordinates": [ -68.82892559, -32.87039429, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Central", "DEPARTAMENTO": "Capital" }, "geometry": { "type": "Point", "coordinates": [ -68.83273967, -32.89193109, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Diego Paroissien", "DEPARTAMENTO": "Maipu" }, "geometry": { "type": "Point", "coordinates": [ -68.78307993, -32.98116238, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital El Sauce", "DEPARTAMENTO": "Guaymallen" }, "geometry": { "type": "Point", "coordinates": [ -68.74479715, -32.8629079, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Enfermeros Argentinos", "DEPARTAMENTO": "Gral. Alvear" }, "geometry": { "type": "Point", "coordinates": [ -67.69827017, -34.9737852, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Eva Perón", "DEPARTAMENTO": "San Rafael" }, "geometry": { "type": "Point", "coordinates": [ -67.81563333, -34.90816971, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Gailhac", "DEPARTAMENTO": "Las Heras" }, "geometry": { "type": "Point", "coordinates": [ -68.77301566, -32.84254737, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital General Las Heras", "DEPARTAMENTO": "Tupungato" }, "geometry": { "type": "Point", "coordinates": [ -69.14735693, -33.36361189, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Humberto Notti", "DEPARTAMENTO": "Guaymallen" }, "geometry": { "type": "Point", "coordinates": [ -68.80428073, -32.89729282, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Lencinas", "DEPARTAMENTO": "Godoy Cruz" }, "geometry": { "type": "Point", "coordinates": [ -68.87078682, -32.90274984, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Dr. Luis Chrabalowski", "DEPARTAMENTO": "Las Heras" }, "geometry": { "type": "Point", "coordinates": [ -69.34781312, -32.5910147, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Luis Lagomaggiore", "DEPARTAMENTO": "Capital" }, "geometry": { "type": "Point", "coordinates": [ -68.86381133, -32.87197611, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Regional Malargue", "DEPARTAMENTO": "Malargue" }, "geometry": { "type": "Point", "coordinates": [ -69.5899888, -35.47502204, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Metraux", "DEPARTAMENTO": "Maipu" }, "geometry": { "type": "Point", "coordinates": [ -68.64483255, -33.00199891, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Perrupato", "DEPARTAMENTO": "San Martin" }, "geometry": { "type": "Point", "coordinates": [ -68.50373954, -33.07279462, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Dr. Ramón Carrillo", "DEPARTAMENTO": "Las Heras" }, "geometry": { "type": "Point", "coordinates": [ -68.81495352, -32.85141379, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Saporiti", "DEPARTAMENTO": "Rivadavia" }, "geometry": { "type": "Point", "coordinates": [ -68.4603233, -33.19712348, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Scaravelli", "DEPARTAMENTO": "Tunuyan" }, "geometry": { "type": "Point", "coordinates": [ -69.01032169, -33.57587659, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Schestakow", "DEPARTAMENTO": "San Rafael" }, "geometry": { "type": "Point", "coordinates": [ -68.32525547, -34.61990108, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Sicoli", "DEPARTAMENTO": "Lavalle" }, "geometry": { "type": "Point", "coordinates": [ -68.5881303, -32.72149461, 0.0 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Hospital Tagarelli", "DEPARTAMENTO": "San Carlos" }, "geometry": { "type": "Point", "coordinates": [ -69.05725075, -33.77318827, 0.0 ] } }
+]
+}

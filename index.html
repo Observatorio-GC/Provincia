@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description"
+		content="Visor del Observatorio Territorial Godoy Cruz, el cual permite la visualización de información geográfica del municipio. Oficina de Planificación Urbana">
+	<meta name="keywords"
+		content="Godoy Cruz, Planificación Urbana, Secretaria de Ambiente y Desarrollo Sustentable, Visor, Observatorio Territorial">
+	<meta name="author" content="IgnacioDiaz - FernandoCruceño">
+	<meta name="copyright" content="Observatorio Territorial Godoy Cruz">
+	<title>ObservatorioTerritorialGC</title>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-33KRTS12JB"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-33KRTS12JB');
+	</script>
+
+	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon1.png">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
+	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
+	<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
+	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
+	<link rel="stylesheet" href="css/Control.Coordinates.css">
+	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
+
+	<!-- SCRIPTS -->
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>  
+	<script src="https://unpkg.com/togeojson@0.16.0"></script>
+	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
+	<script src="scripts/StreetViewButtons.js"></script>
+	<script src="scripts/StreetView1Buttons.js"></script>
+	<script src="scripts/leaflet.pattern.js"></script>
+	<script src="scripts/leaflet-tilelayer-wmts.js"></script>
+	<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
+	<script src="scripts/leaflet.browser.print.js"></script>
+	<script src="scripts/leaflet.filelayer.js"></script>
+	<script src="scripts/Control.Coordinates.js"></script>
+	<script src="scripts/L.Control.MousePosition.js"></script>
+	<script src="js/popups.js"></script>
+	<script src="js/iconos.js"></script>
+
+	<!-- GEOJSON -->
+	
+	<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
+	<script type="text/javascript" src="scripts/godoycruz.js"></script>
+	
+	<script type="text/javascript" src="scripts/ClinicasPrivadas.js"></script>
+	<script type="text/javascript" src="scripts/Hospital.js"></script>
+	<script type="text/javascript" src="scripts/Escuelas.js"></script>
+
+	<script type="text/javascript" src="scripts/Seguridad.js"></script>
+	<script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
+	<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
+	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
+	<script type="text/javascript" src="scripts/APIyS.js"></script>
+
+	<script type="text/javascript" src="scripts/Judicial.js"></script>
+	<script type="text/javascript" src="scripts/Educacion.js"></script>
+	<script type="text/javascript" src="scripts/Vialidad.js"></script>
+	<script type="text/javascript" src="scripts/Irrigacion.js"></script>
+	<script type="text/javascript" src="scripts/Distritos.js"></script>
+	<script type="text/javascript" src="scripts/Salud.js"></script>
+	<script type="text/javascript" src="scripts/EscuelasProvincia.js"></script>
+	<script type="text/javascript" src="scripts/Campamentos.js"></script>
+	<script type="text/javascript" src="scripts/Rutas Nacionales.js"></script>
+	<script type="text/javascript" src="scripts/Departamentos.js"></script>
+
+	<script type="text/javascript" src="scripts/HospitalesPrivados.js"></script>
+	<script type="text/javascript" src="scripts/HospitalesPublicos.js"></script>
+	<script type="text/javascript" src="scripts/CentrosSalud.js"></script>
+
+	
+</head>
+
+<header>
+
+	<style>
+		.leaflet-container {
+			display: flex;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+			font-size: 12px;
+		}
+
+		.leaflet-control-attribution.leaflet-control {
+			font-family: 'Playfair Display', serif;
+			font-size: 15px;
+		}
+
+		.leaflet-control-attribution.leaflet-control a:hover {
+			color: #800080;
+		}
+	</style>
+
+	<h1>Observatorio Territorial de Godoy Cruz</h1>
+	<img src="img/favicon.png" height="auto" width="45px" class="logogc">
+	<div id="map"></div>
+	<div id="referencias">
+		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:</br>18,40 Km.</div> </b>
+	<!-- 	<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>3,90 Km.</div>	</b> -->
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>51,10 Km.</div>	</b>
+		<div class="icono_referencia" id="ref_CicloviasHabilitaDami">Ciclovias Habilitadas DAMI II:</br>14,50 Km.</div>	</b>
+	</div>
+
+	<!-- PAGINA OBSERVATORIO -->
+	<div><abbr title="Conozca el proyecto Piedemonte"><a
+				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
+					src="img/favicon2.png" height="57px" width="256px" aling=right class="logoobserv"></abbr></div>
+
+</header>
+
+<body>
+
+	<!-- FUNCIONES LEAFLET -->
+	<script>
+		/* ARGENMAP */
+		var mapabase_argenmap = new L.TileLayer.WMTS('https://wms.ign.gob.ar/geoserver/capabaseargenmap/gwc/service/wmts?', {
+			layer: 'capabaseargenmap',
+			style: "normal",
+			tilematrixSet: "EPSG:3857",
+			format: "image/png",
+			attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaria de Ambiente y Desarrollo Sustentable - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
+		});
+
+
+		/* BASE LAYERS */
+		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+			esriAttrib = "Powered by <a href='https://www.esri.com/en-us/home'> &copyESRI </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente y Desarrollo Sustentable - Godoy Cruz</a>",
+			mapabase_esri = L.tileLayer(esriUrl, {
+				maxZoom: 20,
+				attribution: esriAttrib
+			});
+
+		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			mapabase_osm = L.tileLayer(osmUrl, {
+				maxZoom: 20,
+				attribution: osmAttrib
+			});
+
+		var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+			otAttrib =
+			'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+			mapabase_ot = L.tileLayer(otUrl, {
+				maxZoom: 20,
+				attribution: otAttrib
+			});
+
+		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
+		    googleSateliteAttrib =
+			"Powered by &copyGoogle" ,
+			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
+				maxZoom: 20,
+				attribution: googleSateliteAttrib
+			});
+
+
+
+		/* OVERLAYS Y GRUPOS */
+		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
+
+		    departamentos = L.geoJson(Departamentos, {
+				onEachFeature: agregarPopupdepartamentos
+			}),
+
+			centrosdesalud = L.geoJson(centrosdesalud, {
+				pointToLayer: crearIconoAsistencia,
+				onEachFeature: agregarPopupSalud
+			}),
+		
+			godoycruz = L.geoJson(godoycruz),
+		
+			Depa = L.geoJson(DistritosDepartamentales, {
+				onEachFeature: agregarPopupDistritosDepartamentales
+			}),
+			apys = L.geoJson(APIyS, {
+				onEachFeature: agregarPopupespaciosverdes
+			}).setStyle({
+				color: "orange",
+				fillOpacity: 0.30
+			}),
+
+			judicial = L.geoJson(Judicial, {
+				onEachFeature: agregarPopupespaciosverdes
+			}),
+			educacion = L.geoJson(Educacion, {
+				onEachFeature: agregarPopupeducacion
+			}),
+			vialidad = L.geoJson(Vialidad, {
+				onEachFeature: agregarPopupespaciosverdes
+			}),
+			irrigacion = L.geoJson(Irrigacion, {
+				onEachFeature: agregarPopupespaciosverdes
+			}),
+			distritos = L.geoJson(Distritos, {
+				onEachFeature: agregarPopupespaciosverdes
+			}),
+			salud = L.geoJson(Salud, {
+				onEachFeature: agregarPopupeducacion
+			}),
+			escuelasPro = L.geoJson(EscuelasProvincia, {
+				pointToLayer: crearIconoEnseñanza,
+				onEachFeature: agregarPopupespaciosverdes
+			}),
+			RN = L.geoJson(RutasNacionales, {
+				onEachFeature: agregarPopupRutas
+			}).setStyle ({
+				color: "black"
+			}),
+			campamentos = L.geoJson(Campamentos, {
+				pointToLayer: crearIconoRojo,
+				onEachFeature: agregarPopupfarmacias
+			}),
+			seguridad = L.geoJson(Seguridad, {
+				onEachFeature: agregarPopupSeguridad
+			}),
+			hospublico = L.geoJson(HospitalesPublicos, {
+				pointToLayer: crearIconoHospitales,
+				onEachFeature: agregarPopupCentros
+			}),
+			hosprivado = L.geoJson(HospitalesPrivados, {
+				pointToLayer: crearIconoClinicaprivada,
+				onEachFeature: agregarPopupCentros
+			}),
+			centrSalud = L.geoJson(CentrosSalud, {
+				pointToLayer: crearIconoAsistencia,
+				onEachFeature: agregarPopupCentros
+			}),
+			infoambiente = L.geoJson(InfoAmbiente, {
+				onEachFeature: agregarPopupDepen
+			});
+
+
+		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
+		var map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
+			layers: [mapabase_esri, departamentos]
+		}).setView([-34.5337, -68.8978], 7);
+
+	
+		/* FUNCIONES DE ESTILO DE OVERLAYS */
+		estiloDistritosDepartamentales();
+		estilojudicial();
+		estiloeducacion();
+		estilovialidad();
+		estiloirrigacion();
+		estilodistritos();
+		estilosalud();
+		estiloseguridad();
+
+		/* CREACIÓN DEL LAYERS CONTROL */
+		var baseMaps = {
+			"OpenTopoMap": mapabase_ot,
+			"Argenmap": mapabase_argenmap,
+			"Google Satelital": mapabase_googleSatelite,
+			"ESRI Satelital": mapabase_esri,
+		};
+
+		var groupedOverlays = {
+		
+			"Analisis": {
+				"Distritos Electorales": distritos,
+				"Educación": educacion,
+				"Irrigación": irrigacion,
+				"Jurisdicciones de Seguridad": seguridad,
+				"Poder Judicial": judicial,
+				"Salud": salud,
+				"Vialidad Provincial": vialidad,
+				"Vialidad Nacional: Campamentos": campamentos,
+				"Vialidad Nacional: Rutas Nacionales": RN,
+				/* "Escuelas": escuelasPro, */
+			},
+
+			"Lugares": {
+				"Centros de Salud": centrSalud,
+				"Hospitales Publicos": hospublico,
+				"Hospitales Privados": hosprivado,
+
+			},
+
+
+			/* "Gestión del Riesgo": {
+				"Amenaza de Inundación": inundacion,
+				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
+				"Cuencas Hidrográficas": cuencas,
+				"Fallas Geologicas": fall,
+				"Red Hídrica": hidrico,
+				"Reservorios urbanos": reservorios,
+				"Subcuencas Maure": subcuencas,
+				"Suelo": suelo,
+				"Vaso Inundación Maure": maure,
+
+			},
+			"Sistema Juridíco-Administrativo": {
+				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
+				"Distritos": Depa,
+				"Límite Urbano": limiurb,
+				"Línea Municipal y de Edificación ": lineasmun,
+				"Zona con Características Especiales de Urbanización": zonaurb,
+				"Zona Especial de Conservacion Natural": zonatu,
+				"Zonificación": zonificacion,
+
+			},
+			"Infraestructura Ambiental": {
+				"Espacios Verdes": espverdes,
+				"Estaciones Meteorológicas": meteo,
+				"Parque Solar (En Ejecución)": granjaSolar,
+				"Inventario de Gases": infoambiente,
+				"Paneles Solares": paneles,
+				"Planta de Clasificación de Residuos": recic,
+				"Puntos de Recepción de Pilas": puntospilas,
+				"Puntos Verdes": punt,
+				"Solmáforos": solma,
+
+			},
+			"Movilidad": {
+				"Ciclovías Existentes": cicloviasexist,
+				"Ciclovías Proyectadas DAMI II": cicloDami,
+				"Ciclovías en Ejecución DAMI II": cicloEjec,
+				"Ciclovías Habilitadas DAMI II": CicloviasHabilitaDami,
+				"Ciclovías Proyectadas Municipalidad": cicloMuni,
+				"Metrotranvía": metro,
+				"Paradas Metrotranvía": paradasMetro,
+				"Índice Final de Caminabilidad": traza,
+
+			},
+			"Turismo": {
+				"Puestos": puestos,
+				"Sendero Turístico - Geológico": sendGeo,
+				"Aventura": ave,
+				"Bares y Comidas": bar,
+				"Bodegas": bode,
+				"Casas de Té y Café": cafe,
+				"Heladerías": hela,
+				"Hospedajes": hospe,
+				"Informador Turístico": informador,
+				"Persianas Comerciales": persianas,
+				"Puestos Programa en la Bici": bicicleta,
+				"Restaurantes": resto,
+				"Spa": spa,
+			},
+
+			"Patrimonio y Cultura": {
+				"Barrios Historicos": barrios,
+				"Canales": canales,
+				"Edificios": edificios,
+				"Esculturas": escultura,
+				"Diques y Planta Potabilizadora": diques,
+				"Sitios y Conjuntos Edilicios": SyCE,
+				"Tramos y Carriles": TyC,
+
+			},
+			"Equipamiento Social": {
+				"Centros de Salud": centrosdesalud,
+				"Clínicas Privadas": clinicaspriv,
+				"Dependencias Municipales": depen,
+				"Establecimientos Educativos": escuelas,
+				"Jardines Municipales": jardinesmuni,
+				"Farmacias": farmacias,
+				"Hospitales": hospital,
+				"Incubadora de Empresas y Escuela de Oficios": incu,
+				"Instituciones de Seguridad": seguridad,
+				"Polideportivos": polideportivos,
+				"Puntos de Wifi": puntoswifi,
+				"Residencias de Adultos Mayores": residenciasad,
+				"Uniones Vecinales": union,
+
+			},
+			"Infraestructura Urbana y de Servicio": {
+				"Bancos": bank,
+				"Barrios Consolidados": BarriosConsolidados,
+				"Barrios Populares": barriospopulares,
+				"Cajeros": caja,
+				"Estaciones de Servicio": estacion,
+				"Líneas de Distribución de Energía": lineasd,
+				"Líneas de Transporte de Energía": lineast,
+				"Mastiles con Identidad Barrial": mastil,
+				"Mastiles en vía Pública": mastilp,
+				"Pago Facil - Rapipago": cobro,
+				"Red Colectora Cloacal (AYSAM)": sistcloacal,
+				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
+
+			}, */
+		};
+		var opciones_groupedlayers = {
+			groupCheckboxes: false
+		};
+
+		L.control.mousePosition().addTo(map);
+	</script>
+
+	<script src="js/funcionesMapa.js"></script>
+</body>
+
+</html>

@@ -77,6 +77,7 @@
 	<script type="text/javascript" src="scripts/EscuelasProvincia.js"></script>
 	<script type="text/javascript" src="scripts/Campamentos.js"></script>
 	<script type="text/javascript" src="scripts/Rutas Nacionales.js"></script>
+	<script type="text/javascript" src="scripts/Rutas Provinciales.js"></script>
 	<script type="text/javascript" src="scripts/Departamentos.js"></script>
 
 	<script type="text/javascript" src="scripts/HospitalesPrivados.js"></script>
@@ -144,6 +145,7 @@
 				attribution: esriAttrib
 			});
 
+	
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			mapabase_osm = L.tileLayer(osmUrl, {
@@ -159,7 +161,7 @@
 				attribution: otAttrib
 			});
 
-		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
+		var googleSatelite = 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
 		    googleSateliteAttrib =
 			"Powered by &copyGoogle" ,
 			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
@@ -222,7 +224,13 @@
 			RN = L.geoJson(RutasNacionales, {
 				onEachFeature: agregarPopupRutas
 			}).setStyle ({
-				color: "#ffffff"
+				color: "#a92001",
+				weight: "5"
+			}),
+			RP = L.geoJson(RutasProvinciales, {
+				onEachFeature: agregarPopupRutasP
+			}).setStyle ({
+				color: "#85cc65"
 			}),
 			campamentos = L.geoJson(Campamentos, {
 				pointToLayer: crearIconoRojo,
@@ -283,9 +291,9 @@
 				"Poder Judicial": judicial,
 				"Salud": salud,
 				"Vialidad Provincial": vialidad,
+				"Vialidad Provincial: Rutas Provinciales": RP,
 				"Vialidad Nacional: Campamentos": campamentos,
 				"Vialidad Nacional: Rutas Nacionales": RN,
-				/* "Escuelas": escuelasPro, */
 			},
 
 			"Lugares": {
@@ -294,109 +302,6 @@
 				"Hospitales Privados": hosprivado,
 			},
 
-
-			/* "Gestión del Riesgo": {
-				"Amenaza de Inundación": inundacion,
-				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
-				"Cuencas Hidrográficas": cuencas,
-				"Fallas Geologicas": fall,
-				"Red Hídrica": hidrico,
-				"Reservorios urbanos": reservorios,
-				"Subcuencas Maure": subcuencas,
-				"Suelo": suelo,
-				"Vaso Inundación Maure": maure,
-
-			},
-			"Sistema Juridíco-Administrativo": {
-				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
-				"Distritos": Depa,
-				"Límite Urbano": limiurb,
-				"Línea Municipal y de Edificación ": lineasmun,
-				"Zona con Características Especiales de Urbanización": zonaurb,
-				"Zona Especial de Conservacion Natural": zonatu,
-				"Zonificación": zonificacion,
-
-			},
-			"Infraestructura Ambiental": {
-				"Espacios Verdes": espverdes,
-				"Estaciones Meteorológicas": meteo,
-				"Parque Solar (En Ejecución)": granjaSolar,
-				"Inventario de Gases": infoambiente,
-				"Paneles Solares": paneles,
-				"Planta de Clasificación de Residuos": recic,
-				"Puntos de Recepción de Pilas": puntospilas,
-				"Puntos Verdes": punt,
-				"Solmáforos": solma,
-
-			},
-			"Movilidad": {
-				"Ciclovías Existentes": cicloviasexist,
-				"Ciclovías Proyectadas DAMI II": cicloDami,
-				"Ciclovías en Ejecución DAMI II": cicloEjec,
-				"Ciclovías Habilitadas DAMI II": CicloviasHabilitaDami,
-				"Ciclovías Proyectadas Municipalidad": cicloMuni,
-				"Metrotranvía": metro,
-				"Paradas Metrotranvía": paradasMetro,
-				"Índice Final de Caminabilidad": traza,
-
-			},
-			"Turismo": {
-				"Puestos": puestos,
-				"Sendero Turístico - Geológico": sendGeo,
-				"Aventura": ave,
-				"Bares y Comidas": bar,
-				"Bodegas": bode,
-				"Casas de Té y Café": cafe,
-				"Heladerías": hela,
-				"Hospedajes": hospe,
-				"Informador Turístico": informador,
-				"Persianas Comerciales": persianas,
-				"Puestos Programa en la Bici": bicicleta,
-				"Restaurantes": resto,
-				"Spa": spa,
-			},
-
-			"Patrimonio y Cultura": {
-				"Barrios Historicos": barrios,
-				"Canales": canales,
-				"Edificios": edificios,
-				"Esculturas": escultura,
-				"Diques y Planta Potabilizadora": diques,
-				"Sitios y Conjuntos Edilicios": SyCE,
-				"Tramos y Carriles": TyC,
-
-			},
-			"Equipamiento Social": {
-				"Centros de Salud": centrosdesalud,
-				"Clínicas Privadas": clinicaspriv,
-				"Dependencias Municipales": depen,
-				"Establecimientos Educativos": escuelas,
-				"Jardines Municipales": jardinesmuni,
-				"Farmacias": farmacias,
-				"Hospitales": hospital,
-				"Incubadora de Empresas y Escuela de Oficios": incu,
-				"Instituciones de Seguridad": seguridad,
-				"Polideportivos": polideportivos,
-				"Puntos de Wifi": puntoswifi,
-				"Residencias de Adultos Mayores": residenciasad,
-				"Uniones Vecinales": union,
-
-			},
-			"Infraestructura Urbana y de Servicio": {
-				"Bancos": bank,
-				"Barrios Consolidados": BarriosConsolidados,
-				"Barrios Populares": barriospopulares,
-				"Cajeros": caja,
-				"Estaciones de Servicio": estacion,
-				"Líneas de Distribución de Energía": lineasd,
-				"Líneas de Transporte de Energía": lineast,
-				"Mastiles con Identidad Barrial": mastil,
-				"Mastiles en vía Pública": mastilp,
-				"Pago Facil - Rapipago": cobro,
-				"Red Colectora Cloacal (AYSAM)": sistcloacal,
-				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
-
-			}, */
 		};
 		var opciones_groupedlayers = {
 			groupCheckboxes: false

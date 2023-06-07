@@ -234,7 +234,13 @@ function agregarPopupCentros(feature, layer) {
 
 function agregarPopupRutas(feature, layer) {
     if (feature.properties && feature.properties.NAME_1) {
-        layer.bindPopup("<strong>" + feature.properties.NAME_1 + "</strong>");
+        layer.bindPopup("<strong>" + feature.properties.NAME_1 + "</strong><br/>" + feature.properties.TIPO + "</strong><br/>");
+    }
+}
+
+function agregarPopupRutasP(feature, layer) {
+    if (feature.properties && feature.properties.rtn) {
+        layer.bindPopup("Ruta Provincial Nº: <strong>" + feature.properties.rtn + "</strong>");
     }
 }
 

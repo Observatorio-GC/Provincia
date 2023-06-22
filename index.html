@@ -83,6 +83,7 @@
 	<script type="text/javascript" src="scripts/HospitalesPrivados.js"></script>
 	<script type="text/javascript" src="scripts/HospitalesPublicos.js"></script>
 	<script type="text/javascript" src="scripts/CentrosSalud.js"></script>
+	<script type="text/javascript" src="scripts/Polideportivos.js"></script>
 
 	
 </head>
@@ -209,7 +210,7 @@
 				onEachFeature: agregarPopupespaciosverdes
 			}),
 			irrigacion = L.geoJson(Irrigacion, {
-				onEachFeature: agregarPopupespaciosverdes
+				onEachFeature: agregarPopupIrrigacion
 			}),
 			distritos = L.geoJson(Distritos, {
 				onEachFeature: agregarPopupespaciosverdes
@@ -248,6 +249,10 @@
 				onEachFeature: agregarPopupCentros
 			}),
 			centrSalud = L.geoJson(CentrosSalud, {
+				pointToLayer: crearIconoAsistencia,
+				onEachFeature: agregarPopupCentros
+			}),
+			poli = L.geoJson(Polideportivos, {
 				pointToLayer: crearIconoAsistencia,
 				onEachFeature: agregarPopupCentros
 			}),
@@ -300,6 +305,7 @@
 				"Centros de Salud": centrSalud,
 				"Hospitales Públicos": hospublico,
 				"Hospitales Privados": hosprivado,
+				"Polideportivos": poli,
 			},
 
 		};

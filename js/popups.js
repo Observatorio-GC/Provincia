@@ -64,7 +64,11 @@ function agregarPopupIrrigacion(feature, layer) {
     }
 }
 
-
+function agregarPopupElectores(feature, layer) {
+    if (feature.properties && feature.properties.NOMBRE) {
+        layer.bindPopup("<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.ZONAS + "</strong><br/>" + "Electores: <strong>" + feature.properties.ELECTORES);
+    }
+}
 function agregarPopupespaciosverdes(feature, layer) {
     if (feature.properties && feature.properties.NOMBRE) {
         layer.bindPopup("<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.ZONAS);

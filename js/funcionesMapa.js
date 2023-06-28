@@ -74,32 +74,21 @@ c.addTo(map);
 
 
 /* TEXTOS CICLOVIAS */
+
 function onOverlayAdd(e) {
     idlayer = "";
-     if (e.name == "Ciclovías Existentes") {
-        idlayer = "cicloviasexist";
-    } else if (e.name == "Ciclovías Proyectadas DAMI II") {
-        idlayer = "cicloDami"
-    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
-        idlayer = "cicloEjec"
-    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
-        idlayer = "CicloviasHabilitaDami"
-    }
+    if (e.name == "Vialidad Nacional: Rutas Nacionales") {
+        idlayer = "RN"
+    } 
 
     document.getElementById("ref_" + idlayer).style.display = 'block';
 }
 
 function onOverlayRemove(e) {
     idlayer = "";
-    if (e.name == "Ciclovías Existentes") {
-        idlayer = "cicloviasexist";
-    } else if (e.name == "Ciclovías Proyectadas DAMI II") {
-        idlayer = "cicloDami"
-    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
-        idlayer = "cicloEjec"
-    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
-        idlayer = "CicloviasHabilitaDami"
-    }
+    if (e.name == "Vialidad Nacional: Rutas Nacionales") {
+        idlayer = "RN"
+    } 
 
     document.getElementById("ref_" + idlayer).style.display = 'none';
 }

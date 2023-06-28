@@ -60,7 +60,7 @@ function agregarPopupdepartamentos(feature, layer) {
 }
 function agregarPopupIrrigacion(feature, layer) {
     if (feature.properties && feature.properties.NOMBRE) {
-        layer.bindPopup("<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.ZONAS + "</strong><br/>" + feature.properties.HA);
+        layer.bindPopup("<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.ZONAS + "</strong><br/>" + "Hectáreas Irrigadas: <strong>" +  feature.properties.HA);
     }
 }
 
@@ -249,8 +249,24 @@ function agregarPopupRutas(feature, layer) {
 
 function agregarPopupRutasP(feature, layer) {
     if (feature.properties && feature.properties.rtn) {
-        layer.bindPopup("Ruta Provincial Nº: <strong>" + feature.properties.rtn + "</strong>");
+        layer.bindPopup("Ruta Provincial Nº:<strong>" + feature.properties.rtn + "</strong>");
     }
+}
+
+function estilorutas() {
+    RN.eachLayer(function (featureInstanceLayer) {
+        var id_feature = featureInstanceLayer.feature.properties['TIPO'];
+        if (id_feature == "PAVIMENTO") {
+            color_actual = '#cc482a';
+        } else if (id_feature == "RIPIO") {
+            color_actual = '#62b8e5';
+        } else if (id_feature == "SUELO NATURAL") {
+            color_actual = '#fbb75b';
+        } 
+        featureInstanceLayer.setStyle({
+            color: color_actual, fillOpacity: 0.75, weight: 4
+        });
+    });
 }
 
 

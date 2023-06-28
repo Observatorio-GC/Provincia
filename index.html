@@ -110,11 +110,19 @@
 	<h1>Observatorio Territorial de Godoy Cruz</h1>
 	<img src="img/favicon.png" height="auto" width="45px" class="logogc">
 	<div id="map"></div>
+	
 	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:</br>18,40 Km.</div> </b>
-	<!-- 	<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>3,90 Km.</div>	</b> -->
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>51,10 Km.</div>	</b>
-		<div class="icono_referencia" id="ref_CicloviasHabilitaDami">Ciclovias Habilitadas DAMI II:</br>14,50 Km.</div>	</b>
+		
+		<div id="caminar">
+			<div class="icono_referencia" id="ref_RN">
+				<p class="titulo"> Rutas Nacionales
+					<p class="optimo">Pavimento</p>
+					<p class="bueno">Ripio</p>
+					<p class="regular">Suelo Natural</p>
+				</p>
+			</div>	  
+	
+		</div>	
 	</div>
 
 	<!-- PAGINA OBSERVATORIO -->
@@ -224,9 +232,6 @@
 			}),
 			RN = L.geoJson(RutasNacionales, {
 				onEachFeature: agregarPopupRutas
-			}).setStyle ({
-				color: "#a92001",
-				weight: "5"
 			}),
 			RP = L.geoJson(RutasProvinciales, {
 				onEachFeature: agregarPopupRutasP
@@ -253,7 +258,7 @@
 				onEachFeature: agregarPopupCentros
 			}),
 			poli = L.geoJson(Polideportivos, {
-				pointToLayer: crearIconoAsistencia,
+				pointToLayer: crearIconoPoli,
 				onEachFeature: agregarPopupCentros
 			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
@@ -276,6 +281,7 @@
 		estilodistritos();
 		estilosalud();
 		estiloseguridad();
+		estilorutas();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {

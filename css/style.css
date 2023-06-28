@@ -68,25 +68,19 @@ h1{
 }
 
 .optimo{
-    background-color: #16b934;
+    background-color: #cc482a;
     border:3px solid black;
     text-align:center;
 }
 
 .bueno{
-    background-color: #fbeb09;
+    background-color: #62b8e5;
     border:3px solid black;
     text-align:center;
 }
 
 .regular{
-    background-color: #ff7f00;
-    border:3px solid black;
-    text-align:center;
-}
-
-.malo{
-    background-color: #e31a1c;
+    background-color: #fbb75b;
     border:3px solid black;
     text-align:center;
 }
